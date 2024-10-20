@@ -1,8 +1,8 @@
 package com.example.chainr
 
 data class CellState(
-    val particleCount: Int,
-    val player: Player?,
+    val particleCount: Int = 0,
+    val player: Player? = null,
 )
 
 enum class Player {

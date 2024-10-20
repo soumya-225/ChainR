@@ -1,6 +1,7 @@
 package com.example.chainr
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +18,7 @@ class GridAdapter(context: Context, private val gameState: GameState) :
         }
 
         listItemView!!.setOnClickListener {
+            Log.d("TAG", "Clicked")
             playChance(
                 gameState,
                 gameState.player,
@@ -50,12 +52,14 @@ class GridAdapter(context: Context, private val gameState: GameState) :
                     1 -> return R.drawable.one_player_one
                     2 -> return R.drawable.two_player_one
                     3 -> return R.drawable.three_player_one
+                    else -> return R.drawable.ic_launcher_background
                 }
             } else {
                 when (cellState.particleCount) {
                     1 -> return R.drawable.one_player_two
                     2 -> return R.drawable.two_player_two
                     3 -> return R.drawable.three_player_two
+                    else -> return R.drawable.ic_launcher_background
                 }
             }
         }
