@@ -21,6 +21,10 @@ class MainActivity : AppCompatActivity() {
 
         val p1 = intent.getStringExtra("player1")
         val p2 = intent.getStringExtra("player2")
+
+        findViewById<TextView>(R.id.tv_p1).text = p1
+        findViewById<TextView>(R.id.tv_p2).text = p2
+
         val row = intent.getIntExtra("row", 5)
         val column = intent.getIntExtra("column", 5)
 
@@ -30,6 +34,7 @@ class MainActivity : AppCompatActivity() {
         tapPlayer = MediaPlayer.create(this, R.raw.click)
 
         gridView = findViewById(R.id.grid_view)
+        gridView.numColumns = column
         val cells = ArrayList<CellState>(25)
         repeat(row * column) {
             cells.add(CellState())
