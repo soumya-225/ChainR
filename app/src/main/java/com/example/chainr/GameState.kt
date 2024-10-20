@@ -14,7 +14,7 @@ data class GameState(
     val gridLength: Int,
     val gridWidth: Int,
     val cells: ArrayList<CellState>,
-    val player: Player,
+    var player: Player,
 ) {
     fun getCell(row: Int, col: Int): CellState {
         return cells[row * gridLength + col]
