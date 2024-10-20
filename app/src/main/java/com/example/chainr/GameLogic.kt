@@ -7,11 +7,49 @@ fun playChance(
     col: Int,
     gameOverCallback: (Player) -> Unit,
 ) {
-    val cell = gameState.getCell(row, col)
-    gameState.setCell(
-        row, col, CellState(
-            particleCount = cell.particleCount + 1,
-            player = player
-        )
-    )
+    gameState.incrementParticleCount(row, col, player)
+
+    var playerOneCount = 0
+    var playerTwoCount = 0
+
+    while (true) {
+        for (gridCell in gameState.cells) {
+            if (gridCell.player == Player.PLAYER_ONE) ++playerOneCount
+            else if (gridCell.player == Player.PLAYER_TWO) ++playerTwoCount
+        }
+
+        if (playerOneCount >= 10) {
+            gameOverCallback(Player.PLAYER_ONE)
+            break
+        }
+        else if (playerTwoCount >= 10) {
+            gameOverCallback(Player.PLAYER_TWO)
+            break
+        }
+
+        val stateChanged = simplifyState(gameState, player)
+        if (!stateChanged) break
+    }
+}
+
+fun simplifyState(gameState: GameState, player: Player): Boolean {
+    var stateChanged = false
+    for (i in 0 until gameState.gridLength) {
+        for (j in 0 until gameState.gridWidth) {
+            val cell = gameState.getCell(i, j)
+            if (cell.particleCount > 3) {
+                stateChanged = true
+                val newParticleCount = cell.particleCount - 4
+                if (newParticleCount > 0)
+                    gameState.setCell(i, j, CellState(newParticleCount, player))
+                else
+                    gameState.setCell(i, j, CellState(particleCount = 0, player = null))
+                if (i > 0) gameState.incrementParticleCount(i - 1, j, player)
+                if (i < gameState.gridLength - 1) gameState.incrementParticleCount(i + 1, j, player)
+                if (j > 0) gameState.incrementParticleCount(i, j - 1, player)
+                if (j < gameState.gridWidth - 1) gameState.incrementParticleCount(i, j + 1, player)
+            }
+        }
+    }
+    return stateChanged
 }

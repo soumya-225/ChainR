@@ -23,4 +23,9 @@ data class GameState(
     fun setCell(row: Int, col: Int, cell: CellState) {
         cells[row * gridLength + col] = cell
     }
+
+    fun incrementParticleCount(row: Int, col: Int, player: Player? = null) {
+        val cell = getCell(row, col)
+        setCell(row, col, CellState(cell.particleCount + 1, player ?: cell.player))
+    }
 }
