@@ -20,11 +20,9 @@ fun playChance(
 
         if (playerOneCount >= 10) {
             gameOverCallback(Player.PLAYER_ONE)
-            break
         }
         else if (playerTwoCount >= 10) {
             gameOverCallback(Player.PLAYER_TWO)
-            break
         }
 
         val stateChanged = simplifyState(gameState, player)
