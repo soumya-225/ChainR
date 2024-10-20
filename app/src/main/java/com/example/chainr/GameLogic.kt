@@ -4,30 +4,25 @@ fun playChance(
     gameState: GameState,
     player: Player,
     row: Int,
-    col: Int,
-    gameOverCallback: (Player) -> Unit,
-) {
+    col: Int
+): Pair<Int, Int> {
     gameState.incrementParticleCount(row, col, player)
 
-    var playerOneCount = 0
-    var playerTwoCount = 0
+    var playerOneCount: Int
+    var playerTwoCount: Int
 
     while (true) {
+        playerOneCount = 0
+        playerTwoCount = 0
         for (gridCell in gameState.cells) {
             if (gridCell.player == Player.PLAYER_ONE) ++playerOneCount
             else if (gridCell.player == Player.PLAYER_TWO) ++playerTwoCount
         }
 
-        if (playerOneCount >= 10) {
-            gameOverCallback(Player.PLAYER_ONE)
-        }
-        else if (playerTwoCount >= 10) {
-            gameOverCallback(Player.PLAYER_TWO)
-        }
-
         val stateChanged = simplifyState(gameState, player)
         if (!stateChanged) break
     }
+    return Pair(playerOneCount, playerTwoCount)
 }
 
 fun simplifyState(gameState: GameState, player: Player): Boolean {
