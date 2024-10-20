@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@color/black"
     tools:context=".MainActivity">
 
@@ -12,6 +13,7 @@
         android:id="@+id/top_app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:background="@color/black"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:layout_constraintTop_toTopOf="parent">
@@ -50,36 +52,38 @@
                         android:layout_height="match_parent">
 
                         <TextView
+                            android:id="@+id/tv_score1"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="5"
                             android:gravity="center"
+                            android:text="0"
                             android:textColor="@color/white"
                             android:textSize="28sp"
                             android:textStyle="bold" />
 
                         <Space
                             android:layout_width="28dp"
-                            android:layout_height="match_parent"/>
+                            android:layout_height="match_parent" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
+                            android:gravity="center"
                             android:text="|"
-                            android:gravity="center"
                             android:textColor="@color/white"
                             android:textSize="28sp"
                             android:textStyle="bold" />
 
                         <Space
                             android:layout_width="28dp"
-                            android:layout_height="match_parent"/>
+                            android:layout_height="match_parent" />
 
                         <TextView
+                            android:id="@+id/tv_score2"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="5"
                             android:gravity="center"
+                            android:text="0"
                             android:textColor="@color/white"
                             android:textSize="28sp"
                             android:textStyle="bold" />
@@ -103,16 +107,24 @@
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
-
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
     <GridView
         android:id="@+id/grid_view"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:horizontalSpacing="2dp"
         android:numColumns="5"
         android:verticalSpacing="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/top_app_bar"
+        android:paddingStart="10dp"
+        android:layout_gravity="center_vertical"
         tools:listitem="@layout/grid_item" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+</LinearLayout>
