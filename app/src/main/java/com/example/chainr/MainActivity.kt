@@ -12,12 +12,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val p1 = intent.getStringExtra("player1")
+        val p2 = intent.getStringExtra("player2")
+        val row = intent.getIntExtra("row", 5)
+        val column = intent.getIntExtra("column", 5)
+
         gridView = findViewById(R.id.grid_view)
         val cells = ArrayList<CellState>(25)
-        repeat(25) {
+        repeat(row * column) {
             cells.add(CellState())
         }
-        gameState = GameState(5, 5, cells, Player.PLAYER_ONE)
+        gameState = GameState(column, row, cells, Player.PLAYER_ONE)
 
         val adapter = GridAdapter(this, gameState)
         gridView.adapter = adapter
